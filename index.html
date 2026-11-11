@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOKUL | Coming soon</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #131414; color: #f7f5ef; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .shell { width: min(100% - 3rem, 74rem); margin-inline: auto; }
+    header { padding-block: 1.5rem; border-bottom: 1px solid #424443; font-weight: 800; letter-spacing: .14em; }
+    main { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 7vw, 6rem); padding-block: clamp(3rem, 10vw, 8rem); }
+    .status { color: #dcfa73; font-weight: 700; }
+    h1 { font-size: clamp(3rem, 7vw, 6.5rem); letter-spacing: -.075em; line-height: .95; margin: .25em 0; }
+    p { line-height: 1.6; color: #c5c8c4; }
+    button { font: inherit; cursor: pointer; }
+    .primary { background: #dcfa73; color: #171913; border: 0; padding: .95rem 1.25rem; font-weight: 750; }
+    .primary:hover { background: #eeffa6; }
+    :focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+    .product-visual { min-height: clamp(15rem, 43vw, 33rem); display: grid; place-items: center; margin: 0; background: radial-gradient(ellipse at 75% 20%, #eaff9b, transparent 68%), #b8d748; color: #222916; }
+    .wordmark { font-size: clamp(3rem, 9vw, 8rem); font-weight: 900; letter-spacing: -.09em; }
+    dialog { width: min(100% - 2rem, 28rem); border: 1px solid #636761; background: #222422; color: inherit; padding: 1.5rem; }
+    dialog::backdrop { background: #000b; }
+    .dialog-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    .dialog-header h2 { margin: 0; }
+    .close { background: transparent; color: inherit; border: 1px solid #777; padding: .35rem .55rem; }
+    label { display: block; margin-bottom: .4rem; }
+    input { width: 100%; padding: .8rem; font: inherit; border: 1px solid #777; background: #131414; color: inherit; margin-bottom: 1rem; }
+    #result { margin-bottom: 0; }
+    @media (max-width: 42rem) {
+      main { grid-template-columns: 1fr; }
+      .product-visual { grid-row: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header><div class="shell">SOKUL</div></header>
+  <main class="shell">
+    <section aria-labelledby="product-name">
+      <span class="status">Coming soon</span>
+      <h1 id="product-name">SOKUL</h1>
+      <p>Get an email when SOKUL is available to order.</p>
+      <button class="primary" id="notify" type="button">Notify me</button>
+    </section>
+    <!-- Replace this wordmark with the product photo when it is ready. -->
+    <div class="product-visual" aria-hidden="true"><span class="wordmark">SOKUL</span></div>
+  </main>
+
+  <dialog id="signup" aria-labelledby="signup-title">
+    <div class="dialog-header">
+      <h2 id="signup-title">Get launch updates</h2>
+      <form method="dialog"><button class="close" type="submit">Close</button></form>
+    </div>
+    <p id="signup-description">Demo mode. Use a test email to try the signup on this device.</p>
+    <form id="signup-form" aria-describedby="signup-description">
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" autocomplete="email" required autofocus>
+      <button class="primary" type="submit">Join the waitlist</button>
+    </form>
+    <p id="result" role="status"></p>
+  </dialog>
+
+  <script>
+    const dialog = document.querySelector('#signup');
+    const form = document.querySelector('#signup-form');
+    const email = document.querySelector('#email');
+    const result = document.querySelector('#result');
+    const storageKey = 'sokul-demo-waitlist';
+
+    document.querySelector('#notify').addEventListener('click', () => {
+      result.textContent = '';
+      dialog.showModal();
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const address = email.value.trim().toLowerCase();
+
+      try {
+        const addresses = JSON.parse(localStorage.getItem(storageKey) ?? '[]');
+        if (addresses.includes(address)) {
+          result.textContent = 'This email is already saved on this device.';
+          return;
+        }
+        localStorage.setItem(storageKey, JSON.stringify([...addresses, address]));
+        form.reset();
+        result.textContent = 'Test signup saved on this device.';
+      } catch {
+        result.textContent = 'This browser could not save the test signup.';
+      }
+    });
+  </script>
+</body>
+</html>
