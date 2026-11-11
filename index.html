@@ -3,31 +3,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SOKUL | Coming soon</title>
+  <title>SOKUL Family Trail Pack</title>
+  <meta name="description" content="Four grab-and-go pouches with trail snacks and electrolyte mix for your next family hike.">
   <style>
-    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #131414; color: #f7f5ef; }
+    :root { color-scheme: light; font-family: system-ui, sans-serif; background: #faf7ef; color: #183322; }
     * { box-sizing: border-box; }
+    [hidden] { display: none; }
     body { margin: 0; }
     .shell { width: min(100% - 3rem, 74rem); margin-inline: auto; }
-    header { padding-block: 1.5rem; border-bottom: 1px solid #424443; font-weight: 800; letter-spacing: .14em; }
-    main { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 7vw, 6rem); padding-block: clamp(3rem, 10vw, 8rem); }
-    .status { color: #dcfa73; font-weight: 700; }
-    h1 { font-size: clamp(3rem, 7vw, 6.5rem); letter-spacing: -.075em; line-height: .95; margin: .25em 0; }
-    p { line-height: 1.6; color: #c5c8c4; }
+    header { padding-block: .75rem; border-bottom: 1px solid #ddd5c5; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .logo { display: block; width: min(11rem, 100%); height: auto; mix-blend-mode: multiply; }
+    main { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; gap: clamp(2rem, 5vw, 4rem); padding-block: clamp(2.5rem, 8vw, 6rem); }
+    .status { color: #345440; font-weight: 700; }
+    h1 { font-family: Georgia, serif; font-size: clamp(2.75rem, 5.6vw, 5.5rem); letter-spacing: -.055em; line-height: .98; margin: .25em 0; }
+    p { line-height: 1.6; color: #435044; }
+    .intro { font-size: 1.125rem; max-width: 35ch; }
+    .contents-title { margin: 1.5rem 0 .5rem; font-size: 1rem; }
+    .pack-contents { padding-inline-start: 1.25rem; margin-block: 0 1.5rem; color: #435044; line-height: 1.6; }
+    .pack-contents li + li { margin-top: .35rem; }
     button { font: inherit; cursor: pointer; }
-    .primary { background: #dcfa73; color: #171913; border: 0; padding: .95rem 1.25rem; font-weight: 750; }
-    .primary:hover { background: #eeffa6; }
-    :focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
-    .product-visual { min-height: clamp(15rem, 43vw, 33rem); display: grid; place-items: center; margin: 0; background: radial-gradient(ellipse at 75% 20%, #eaff9b, transparent 68%), #b8d748; color: #222916; }
-    .wordmark { font-size: clamp(3rem, 9vw, 8rem); font-weight: 900; letter-spacing: -.09em; }
-    dialog { width: min(100% - 2rem, 28rem); border: 1px solid #636761; background: #222422; color: inherit; padding: 1.5rem; }
-    dialog::backdrop { background: #000b; }
+    .primary { display: inline-block; background: #20452e; color: #fffaf0; border: 0; border-radius: .25rem; padding: .95rem 1.25rem; font-weight: 750; text-decoration: none; }
+    .primary:hover { background: #2e5b3e; }
+    .header-order { padding: .65rem 1.15rem; }
+    .header-order[hidden] { display: none; }
+    .back-link { display: block; width: fit-content; margin-top: 1rem; color: inherit; }
+    :focus-visible { outline: 2px solid #245a3b; outline-offset: 4px; }
+    .product-visual { margin: 0; }
+    .product-visual img { display: block; width: 100%; height: auto; border-radius: .5rem; }
+    figcaption { margin-top: .65rem; font-size: .875rem; color: #435044; }
+    dialog { width: min(100% - 2rem, 28rem); border: 1px solid #9a9f8f; border-radius: .5rem; background: #faf7ef; color: inherit; padding: 1.5rem; }
+    dialog::backdrop { background: #14281dcc; }
     .dialog-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
     .dialog-header h2 { margin: 0; }
     .close { background: transparent; color: inherit; border: 1px solid #777; padding: .35rem .55rem; }
     label { display: block; margin-bottom: .4rem; }
-    input { width: 100%; padding: .8rem; font: inherit; border: 1px solid #777; background: #131414; color: inherit; margin-bottom: 1rem; }
-    #result { margin-bottom: 0; }
+    input { width: 100%; padding: .8rem; font: inherit; border: 1px solid #777; background: #fffdf8; color: inherit; margin-bottom: 1rem; }
+    input:disabled, .primary:disabled { background: #e6e7de; color: #435044; cursor: default; }
     @media (max-width: 42rem) {
       main { grid-template-columns: 1fr; }
       .product-visual { grid-row: 1; }
@@ -35,61 +47,69 @@
   </style>
 </head>
 <body>
-  <header><div class="shell">SOKUL</div></header>
-  <main class="shell">
+  <header>
+    <div class="shell header-inner">
+      <img class="logo" src="images/logo-light.png" alt="SOKUL">
+      <a class="primary header-order" id="header-order" href="?page=order">Order</a>
+    </div>
+  </header>
+  <main class="shell" id="storefront">
     <section aria-labelledby="product-name">
-      <span class="status">Coming soon</span>
-      <h1 id="product-name">SOKUL</h1>
-      <p>Get an email when SOKUL is available to order.</p>
-      <button class="primary" id="notify" type="button">Notify me</button>
+      <h1 id="product-name">Family Trail Pack</h1>
+      <p class="intro">Four grab-and-go pouches with trail snacks and electrolyte mix for your next family hike.</p>
+      <h2 class="contents-title">Inside each hiker pouch</h2>
+      <ul class="pack-contents">
+        <li>Honey peanut butter squeeze pack and crackers</li>
+        <li>Lemon-lime electrolyte mix</li>
+        <li>Individually wrapped beef stick</li>
+        <li>Trail mix, an energy bar, and a sweet treat</li>
+      </ul>
+      <a class="primary" href="?page=order">Order</a>
     </section>
-    <!-- Replace this wordmark with the product photo when it is ready. -->
-    <div class="product-visual" aria-hidden="true"><span class="wordmark">SOKUL</span></div>
+    <figure class="product-visual">
+      <img src="images/mvp-example.png" width="1536" height="1024" alt="Family Trail Pack box with four hiker pouches and one pouch’s contents: honey peanut butter, crackers, lemon-lime electrolyte mix, trail mix, an energy bar, a sweet treat, and a beef stick.">
+      <figcaption>Family Trail Pack packaging concept with one hiker’s snacks shown.</figcaption>
+    </figure>
   </main>
 
-  <dialog id="signup" aria-labelledby="signup-title">
+  <main class="shell" id="order-page" hidden>
+    <section aria-labelledby="order-title">
+      <span class="status">Sold out</span>
+      <h1 id="order-title">Order Family Trail Pack</h1>
+      <p>The Family Trail Pack is currently unavailable.</p>
+      <button class="primary" id="availability-button" type="button">Availability details</button>
+      <a class="back-link" href="index.html">Back to product</a>
+    </section>
+  </main>
+
+  <dialog id="signup" aria-labelledby="signup-title" aria-describedby="availability">
     <div class="dialog-header">
-      <h2 id="signup-title">Get launch updates</h2>
+      <h2 id="signup-title">Sold out</h2>
       <form method="dialog"><button class="close" type="submit">Close</button></form>
     </div>
-    <p id="signup-description">Demo mode. Use a test email to try the signup on this device.</p>
-    <form id="signup-form" aria-describedby="signup-description">
+    <p id="availability">Email notifications are currently unavailable. Check back for updates on the next release.</p>
+    <div id="waitlist">
       <label for="email">Email address</label>
-      <input id="email" name="email" type="email" autocomplete="email" required autofocus>
-      <button class="primary" type="submit">Join the waitlist</button>
-    </form>
-    <p id="result" role="status"></p>
+      <input id="email" type="email" disabled>
+      <button class="primary" type="button" disabled>Join the waitlist</button>
+    </div>
   </dialog>
 
   <script>
     const dialog = document.querySelector('#signup');
-    const form = document.querySelector('#signup-form');
-    const email = document.querySelector('#email');
-    const result = document.querySelector('#result');
-    const storageKey = 'sokul-demo-waitlist';
 
-    document.querySelector('#notify').addEventListener('click', () => {
-      result.textContent = '';
+    document.querySelector('#availability-button').addEventListener('click', () => {
       dialog.showModal();
     });
 
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const address = email.value.trim().toLowerCase();
+    if (new URLSearchParams(window.location.search).get('page') === 'order') {
+      document.querySelector('#header-order').hidden = true;
+      document.querySelector('#storefront').hidden = true;
+      document.querySelector('#order-page').hidden = false;
+      document.title = 'Order Family Trail Pack | SOKUL';
+      dialog.showModal();
+    }
 
-      try {
-        const addresses = JSON.parse(localStorage.getItem(storageKey) ?? '[]');
-        if (addresses.includes(address)) {
-          result.textContent = 'This email is already saved on this device.';
-          return;
-        }
-        localStorage.setItem(storageKey, JSON.stringify([...addresses, address]));
-        form.reset();
-        result.textContent = 'Test signup saved on this device.';
-      } catch {
-        result.textContent = 'This browser could not save the test signup.';
-      }
-    });
   </script>
 </body>
 </html>
