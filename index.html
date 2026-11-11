@@ -32,14 +32,16 @@
     .product-visual { margin: 0; }
     .product-visual img { display: block; width: 100%; height: auto; border-radius: .5rem; }
     figcaption { margin-top: .65rem; font-size: .875rem; color: #435044; }
-    dialog { width: min(100% - 2rem, 28rem); border: 1px solid #9a9f8f; border-radius: .5rem; background: #faf7ef; color: inherit; padding: 1.5rem; }
-    dialog::backdrop { background: #14281dcc; }
-    .dialog-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-    .dialog-header h2 { margin: 0; }
-    .close { background: transparent; color: inherit; border: 1px solid #777; padding: .35rem .55rem; }
-    label { display: block; margin-bottom: .4rem; }
-    input { width: 100%; padding: .8rem; font: inherit; border: 1px solid #777; background: #fffdf8; color: inherit; margin-bottom: 1rem; }
-    input:disabled, .primary:disabled { background: #e6e7de; color: #435044; cursor: default; }
+    dialog { width: min(100% - 2rem, 34rem); max-height: calc(100dvh - 2rem); border: 1px solid #ddd5c5; border-radius: 1rem; background: #faf7ef; color: inherit; padding: clamp(1rem, 4vw, 2rem); box-shadow: 0 1rem 3rem #14281d40; }
+    dialog::backdrop { background: #14281db3; }
+    .dialog-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .dialog-header h2 { margin: 0; font-family: Georgia, serif; font-size: 2rem; }
+    #availability { margin: .5rem 0 1.25rem; }
+    .waitlist-frame { display: block; width: 100%; height: 15rem; border: 0; }
+    .form-fallback { margin: .75rem 0 0; font-size: .875rem; }
+    .form-fallback a { color: inherit; }
+    .close { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; background: transparent; color: inherit; border: 1px solid #ddd5c5; border-radius: 50%; font-size: 1.5rem; line-height: 1; }
+    .close:hover { background: #eee9dc; }
     @media (max-width: 42rem) {
       main { grid-template-columns: 1fr; }
       .product-visual { grid-row: 1; }
@@ -76,8 +78,8 @@
     <section aria-labelledby="order-title">
       <span class="status">Sold out</span>
       <h1 id="order-title">Order Family Trail Pack</h1>
-      <p>The Family Trail Pack is currently unavailable.</p>
-      <button class="primary" id="availability-button" type="button">Availability details</button>
+      <p>Join the waitlist for an email when the Family Trail Pack is available.</p>
+      <button class="primary" id="availability-button" type="button">Join the waitlist</button>
       <a class="back-link" href="index.html">Back to product</a>
     </section>
   </main>
@@ -85,14 +87,17 @@
   <dialog id="signup" aria-labelledby="signup-title" aria-describedby="availability">
     <div class="dialog-header">
       <h2 id="signup-title">Sold out</h2>
-      <form method="dialog"><button class="close" type="submit">Close</button></form>
+      <form method="dialog"><button class="close" type="submit" aria-label="Close" autofocus>×</button></form>
     </div>
-    <p id="availability">Email notifications are currently unavailable. Check back for updates on the next release.</p>
-    <div id="waitlist">
-      <label for="email">Email address</label>
-      <input id="email" type="email" disabled>
-      <button class="primary" type="button" disabled>Join the waitlist</button>
-    </div>
+    <p id="availability">Get an email when the Family Trail Pack is available to order.</p>
+    <iframe
+      class="waitlist-frame"
+      title="SOKUL Family Trail Pack waitlist"
+      src="https://script.google.com/macros/s/AKfycbxAjqrd1y7KDR5_oB817nF2ZJYGifyW4ialg92Ydzs5JrQt3vIOe5nSQhuQ_uYKp06R/exec"
+      loading="lazy"></iframe>
+    <p class="form-fallback">
+      <a href="https://script.google.com/macros/s/AKfycbxAjqrd1y7KDR5_oB817nF2ZJYGifyW4ialg92Ydzs5JrQt3vIOe5nSQhuQ_uYKp06R/exec" target="_blank" rel="noopener">Open the waitlist form in a new tab</a>
+    </p>
   </dialog>
 
   <script>
@@ -109,7 +114,6 @@
       document.title = 'Order Family Trail Pack | SOKUL';
       dialog.showModal();
     }
-
   </script>
 </body>
 </html>
