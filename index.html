@@ -11,10 +11,10 @@
     [hidden] { display: none; }
     body { margin: 0; }
     .shell { width: min(100% - 3rem, 74rem); margin-inline: auto; }
-    header { padding-block: .75rem; border-bottom: 1px solid #ddd5c5; }
+    header { padding-block: .75rem; background: #20452e; color: #fffaf0; border-bottom: 1px solid #183322; }
     .header-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: clamp(.5rem, 2vw, 1rem); }
-    .header-tagline { max-width: min(22rem, 34vw); margin: 0; color: #345440; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
-    .logo { display: block; width: min(11rem, 100%); height: auto; mix-blend-mode: multiply; }
+    .header-tagline { max-width: min(22rem, 34vw); margin: 0; color: #fffaf0; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+    .logo { display: block; width: min(11rem, 100%); height: auto; filter: grayscale(1) invert(1) sepia(1) saturate(.2); mix-blend-mode: lighten; }
     main { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; gap: clamp(2rem, 5vw, 4rem); padding-block: clamp(2.5rem, 8vw, 6rem); }
     .status { color: #345440; font-weight: 700; }
     h1 { font-family: Georgia, serif; font-size: clamp(2.75rem, 5.6vw, 5.5rem); letter-spacing: -.055em; line-height: .98; margin: .25em 0; }
@@ -26,7 +26,9 @@
     button { font: inherit; cursor: pointer; }
     .primary { display: inline-block; background: #20452e; color: #fffaf0; border: 0; border-radius: .25rem; padding: .95rem 1.25rem; font-weight: 750; text-decoration: none; }
     .primary:hover { background: #2e5b3e; }
-    .header-order { justify-self: end; padding: .65rem clamp(.65rem, 2vw, 1.15rem); }
+    .header-order { justify-self: end; padding: .65rem clamp(.65rem, 2vw, 1.15rem); background: #fffaf0; color: #20452e; }
+    .header-order:hover { background: #e8e1cf; }
+    .header-order:focus-visible { outline-color: #fffaf0; }
     .header-order[hidden] { display: none; }
     .back-link { display: block; width: fit-content; margin-top: 1rem; color: inherit; }
     :focus-visible { outline: 2px solid #245a3b; outline-offset: 4px; }
