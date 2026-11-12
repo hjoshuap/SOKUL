@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SOKUL Family Trail Pack</title>
   <meta name="description" content="Four grab-and-go pouches with trail snacks and electrolyte mix for your next family hike.">
+  <script>
+    // Add the GA4 web stream's G- measurement ID to enable analytics.
+    const analyticsMeasurementId = 'G-5MBPLRVXWX';
+
+    if (analyticsMeasurementId) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', analyticsMeasurementId);
+
+      const analyticsScript = document.createElement('script');
+      analyticsScript.async = true;
+      analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(analyticsMeasurementId);
+      document.head.append(analyticsScript);
+    }
+  </script>
   <style>
     :root { color-scheme: light; font-family: system-ui, sans-serif; background: #faf7ef; color: #183322; }
     * { box-sizing: border-box; }
@@ -56,7 +72,7 @@
     <div class="shell header-inner">
       <img class="logo" src="images/logo-light.png" alt="SOKUL">
       <p class="header-tagline">Trail snacks 4 hikers</p>
-      <a class="primary header-order" id="header-order" href="?page=order">Order</a>
+      <a class="primary header-order" id="header-order" href="?page=order" data-order-placement="header">Order</a>
     </div>
   </header>
   <main class="shell" id="storefront">
@@ -70,7 +86,7 @@
         <li>Individually wrapped beef stick</li>
         <li>Trail mix, an energy bar, and a sweet treat</li>
       </ul>
-      <a class="primary" href="?page=order">Order</a>
+      <a class="primary" href="?page=order" data-order-placement="product">Order</a>
     </section>
     <figure class="product-visual">
       <img src="images/mvp-example.png" width="1536" height="1024" alt="Family Trail Pack box with four hiker pouches and one pouch’s contents: honey peanut butter, crackers, lemon-lime electrolyte mix, trail mix, an energy bar, a sweet treat, and a beef stick.">
@@ -106,6 +122,12 @@
 
   <script>
     const dialog = document.querySelector('#signup');
+
+    document.querySelectorAll('[data-order-placement]').forEach(link => {
+      link.addEventListener('click', () => {
+        window.gtag?.('event', 'order_click', { button_placement: link.dataset.orderPlacement });
+      });
+    });
 
     document.querySelector('#availability-button').addEventListener('click', () => {
       dialog.showModal();
