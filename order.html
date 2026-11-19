@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Build Your Family Trail Pack | SOKUL</title>
+  <meta name="description" content="Choose at least six snacks and drink mixes for your SOKUL Family Trail Pack.">
+  <link rel="preconnect" href="https://script.google.com">
+  <script>
+    // Add the GA4 web stream's G- measurement ID to enable analytics.
+    const analyticsMeasurementId = 'G-5MBPLRVXWX';
+
+    if (analyticsMeasurementId) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', analyticsMeasurementId);
+
+      const analyticsScript = document.createElement('script');
+      analyticsScript.async = true;
+      analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(analyticsMeasurementId);
+      document.head.append(analyticsScript);
+    }
+  </script>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; background: #faf7ef; color: #183322; }
+    * { box-sizing: border-box; }
+    [hidden] { display: none; }
+    body { margin: 0; }
+    .shell { width: min(100% - 3rem, 74rem); margin-inline: auto; }
+    header { padding-block: .75rem; background: #20452e; color: #fffaf0; border-bottom: 1px solid #183322; }
+    .header-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: clamp(.5rem, 2vw, 1rem); }
+    .header-tagline { max-width: min(22rem, 34vw); margin: 0; color: #fffaf0; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+    .logo { display: block; width: min(11rem, 100%); height: auto; filter: grayscale(1) invert(1) sepia(1) saturate(.2); mix-blend-mode: lighten; }
+    main { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; gap: clamp(2rem, 5vw, 4rem); padding-block: clamp(2.5rem, 8vw, 6rem); }
+    .status { color: #345440; font-weight: 700; }
+    h1 { font-family: Georgia, serif; font-size: clamp(2.75rem, 5.6vw, 5.5rem); letter-spacing: -.055em; line-height: .98; margin: .25em 0; }
+    p { line-height: 1.6; color: #435044; }
+    .intro { font-size: 1.125rem; max-width: 35ch; }
+    .contents-title { margin: 1.5rem 0 .5rem; font-size: 1rem; }
+    .pack-contents { padding-inline-start: 1.25rem; margin-block: 0 1.5rem; color: #435044; line-height: 1.6; }
+    .pack-contents li + li { margin-top: .35rem; }
+    button { font: inherit; cursor: pointer; }
+    .primary { display: inline-block; background: #20452e; color: #fffaf0; border: 0; border-radius: .25rem; padding: .95rem 1.25rem; font-weight: 750; text-decoration: none; }
+    .primary:hover { background: #2e5b3e; }
+    .back-link { display: block; width: fit-content; margin-top: 1rem; color: inherit; }
+    :focus-visible { outline: 2px solid #245a3b; outline-offset: 4px; }
+    .product-visual { margin: 0; }
+    .product-visual img { display: block; width: 100%; height: auto; border-radius: .5rem; }
+    figcaption { margin-top: .65rem; font-size: .875rem; color: #435044; }
+    dialog { width: min(100% - 2rem, 32rem); max-height: calc(100dvh - 2rem); border: 1px solid #ddd5c5; border-top: .35rem solid #20452e; border-radius: 1.25rem; background: #faf7ef; color: inherit; padding: 3rem clamp(1rem, 5vw, 2.5rem) 1.25rem; text-align: center; box-shadow: 0 1.25rem 4rem #14281d55; }
+    dialog::backdrop { background: #14281db3; }
+    #signup-title { margin: 0; font-family: Georgia, serif; font-size: clamp(1.8rem, 6vw, 2.65rem); }
+    #availability { max-width: 32ch; margin: .7rem auto 1.25rem; }
+    .waitlist-frame { display: block; width: min(100%, 22rem); height: 13rem; margin-inline: auto; border: 0; }
+    .close { position: absolute; inset: .65rem .65rem auto auto; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; background: transparent; color: inherit; border: 1px solid #ddd5c5; border-radius: 50%; font-size: 1.5rem; line-height: 1; }
+    .close:hover { background: #eee9dc; }
+    @media (max-width: 42rem) {
+      main { grid-template-columns: 1fr; }
+      .product-visual { grid-row: 1; }
+    }
+    main { align-items: start; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+    .product-visual { margin-top: 1rem; }
+    .pack-items { list-style: none; padding: 0; margin: 1.5rem 0; }
+    .pack-item { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .65rem 0; border-bottom: 1px solid #ddd5c5; }
+    .quantity { display: flex; flex: none; align-items: center; gap: .25rem; }
+    .quantity button { width: 2.75rem; height: 2.75rem; border: 1px solid #afbdad; border-radius: .4rem; background: #20452e; color: #fffaf0; font-weight: 750; font-size: 1.25rem; }
+    .quantity output { min-width: 3ch; text-align: center; font-variant-numeric: tabular-nums; }
+    button:disabled { opacity: .55; cursor: default; }
+    .quantity button:not(:disabled):hover { background: #2e5b3e; }
+    .pack-control { padding: .55rem .7rem; border: 1px solid #20452e; border-radius: .25rem; background: #fffaf0; color: #20452e; font: inherit; }
+    .pack-quantity { margin-top: .75rem; }
+    #pack-quantity { width: 5.5rem; }
+    .pack-status { margin-block: 0 .75rem; }
+    @media (max-width: 42rem) {
+      .product-visual { grid-row: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell header-inner">
+      <a href="index.html"><img class="logo" src="images/logo-light.png" alt="SOKUL home"></a>
+      <p class="header-tagline">Trail snacks 4 hikers</p>
+    </div>
+  </header>
+  <main class="shell">
+    <section aria-labelledby="pack-title">
+      <h1 id="pack-title">Build your Family Trail Pack</h1>
+      <p>Choose seven to nine items per pouch, including up to two drink mixes.</p>
+      <label for="pack-size">Pack size</label>
+      <select class="pack-control" id="pack-size">
+        <option value="1">Single pack</option>
+        <option value="4">Family pack</option>
+      </select>
+      <div class="pack-quantity">
+        <label id="quantity-label" for="pack-quantity">Number of single packs</label>
+        <input class="pack-control" id="pack-quantity" type="number" min="1" step="1" value="1" required>
+        <p id="family-note" hidden>Each family pack has four identical pouches with your selections.</p>
+      </div>
+      <ul class="pack-items" id="pack-items">
+        <li class="pack-item" data-item="honey_peanut_butter" data-cost="99" data-limit="9">
+          <div><span id="item-0">Honey peanut butter squeeze pack</span></div>
+          <div class="quantity" role="group" aria-labelledby="item-0">
+            <button type="button" data-delta="-1" aria-label="Remove one Honey peanut butter squeeze pack">−</button>
+            <output aria-label="Honey peanut butter squeeze pack quantity" aria-live="off">1</output>
+            <button type="button" data-delta="1" aria-label="Add one Honey peanut butter squeeze pack">+</button>
+          </div>
+        </li>
+        <li class="pack-item" data-item="crackers" data-cost="39" data-limit="9">
+          <div><span id="item-1">Crackers</span></div>
+          <div class="quantity" role="group" aria-labelledby="item-1">
+            <button type="button" data-delta="-1" aria-label="Remove one Crackers">−</button>
+            <output aria-label="Crackers quantity" aria-live="off">1</output>
+            <button type="button" data-delta="1" aria-label="Add one Crackers">+</button>
+          </div>
+        </li>
+        <li class="pack-item" data-item="drink_mix" data-cost="150" data-limit="2">
+          <div><span id="item-2">Lemon-lime electrolyte mix</span></div>
+          <div class="quantity" role="group" aria-labelledby="item-2">
+            <button type="button" data-delta="-1" aria-label="Remove one Lemon-lime electrolyte mix">−</button>
+            <output aria-label="Lemon-lime electrolyte mix quantity" aria-live="off">1</output>
+            <button type="button" data-delta="1" aria-label="Add one Lemon-lime electrolyte mix">+</button>
+          </div>
+        </li>
+        <li class="pack-item" data-item="beef_stick" data-cost="147" data-limit="9">
+          <div><span id="item-3">Individually wrapped beef stick</span></div>
+          <div class="quantity" role="group" aria-labelledby="item-3">
+            <button type="button" data-delta="-1" aria-label="Remove one Individually wrapped beef stick">−</button>
+            <output aria-label="Individually wrapped beef stick quantity" aria-live="off">1</output>
+            <button type="button" data-delta="1" aria-label="Add one Individually wrapped beef stick">+</button>
+          </div>
+        </li>
+        <li class="pack-item" data-item="trail_mix" data-cost="82" data-limit="9">
+          <div><span id="item-4">Trail mix</span></div>
+          <div class="quantity" role="group" aria-labelledby="item-4">
+            <button type="button" data-delta="-1" aria-label="Remove one Trail mix">−</button>
+            <output aria-label="Trail mix quantity" aria-live="off">1</output>
+            <button type="button" data-delta="1" aria-label="Add one Trail mix">+</button>
+          </div>
+        </li>
+        <li class="pack-item" data-item="granola_bar_pairs" data-cost="61" data-limit="9">
+          <div><span id="item-5">Two granola bars</span></div>
+          <div class="quantity" role="group" aria-labelledby="item-5">
+            <button type="button" data-delta="-1" aria-label="Remove one Two granola bars">−</button>
+            <output aria-label="Two granola bars quantity" aria-live="off">1</output>
+            <button type="button" data-delta="1" aria-label="Add one Two granola bars">+</button>
+          </div>
+        </li>
+        <li class="pack-item" data-item="sweet_treat" data-cost="28" data-limit="9">
+          <div><span id="item-6">Sweet treat</span></div>
+          <div class="quantity" role="group" aria-labelledby="item-6">
+            <button type="button" data-delta="-1" aria-label="Remove one Sweet treat">−</button>
+            <output aria-label="Sweet treat quantity" aria-live="off">1</output>
+            <button type="button" data-delta="1" aria-label="Add one Sweet treat">+</button>
+          </div>
+        </li>
+      </ul>
+      <p class="pack-status status" id="pack-status" role="status">7 items selected.</p>
+      <p class="status" id="pack-total" role="status">Total price: $10.00</p>
+      <button class="primary" id="availability-button" type="button" aria-describedby="pack-status" disabled>Order</button>
+      <a class="back-link" href="index.html">Back to product</a>
+    </section>
+    <figure class="product-visual">
+      <img src="images/mvp-example.png" width="1536" height="1024" alt="Family Trail Pack box with four hiker pouches and one pouch’s contents: honey peanut butter, crackers, lemon-lime electrolyte mix, trail mix, granola bars, a sweet treat, and a beef stick.">
+      <figcaption>Family Trail Pack packaging concept with one hiker’s snacks shown.</figcaption>
+    </figure>
+  </main>
+  <dialog id="signup" aria-labelledby="signup-title" aria-describedby="availability">
+    <form method="dialog"><button class="close" type="submit" aria-label="Close" autofocus>×</button></form>
+    <h2 id="signup-title">Join the waitlist</h2>
+    <p id="availability">The Family Trail Pack is sold out. We’ll email you when it’s available.</p>
+    <iframe
+      class="waitlist-frame"
+      title="SOKUL Family Trail Pack waitlist"
+      src="https://script.google.com/macros/s/AKfycbxAjqrd1y7KDR5_oB817nF2ZJYGifyW4ialg92Ydzs5JrQt3vIOe5nSQhuQ_uYKp06R/exec"
+      loading="eager"></iframe>
+  </dialog>
+  <script>
+    const dialog = document.querySelector('#signup');
+    const waitlistFrame = dialog.querySelector('.waitlist-frame');
+
+    window.addEventListener('message', event => {
+      if (event.data !== 'sokul:waitlist_signup') return;
+
+      const isAppsScriptOrigin = event.origin === 'https://script.google.com'
+        || /^https:\/\/[a-z0-9-]+-script\.googleusercontent\.com$/.test(event.origin);
+      if (!isAppsScriptOrigin) return;
+
+      // Accept messages from our waitlist frame and its Apps Script child frame.
+      let source = event.source;
+      while (source && source !== window && source !== waitlistFrame.contentWindow) {
+        source = source.parent;
+      }
+      if (source && source === waitlistFrame.contentWindow) {
+        window.gtag?.('event', 'waitlist_signup');
+      }
+    });
+
+    const includedItems = 7;
+    const maximumItems = 9;
+    const extraMarkup = 10;
+    const packSize = document.querySelector('#pack-size');
+    const familyNote = document.querySelector('#family-note');
+    const quantityLabel = document.querySelector('#quantity-label');
+    const quantityInput = document.querySelector('#pack-quantity');
+    const packItems = document.querySelector('#pack-items');
+    const items = Array.from(packItems.children);
+    const packStatus = document.querySelector('#pack-status');
+    const packTotal = document.querySelector('#pack-total');
+    const availabilityButton = document.querySelector('#availability-button');
+    const selections = [...items];
+    const defaultItemsCost = items.reduce((sum, item) => sum + Number(item.dataset.cost), 0);
+    const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+    function getPackTotalCents(pouchCount, packQuantity) {
+      const includedCost = selections.slice(0, includedItems)
+        .reduce((sum, item) => sum + Number(item.dataset.cost), 0);
+      const substitutionCost = selections.length >= includedItems ? includedCost - defaultItemsCost : 0;
+      const extraCostPerPouch = selections.slice(includedItems)
+        .reduce((sum, item) => sum + Number(item.dataset.cost) + extraMarkup, 0);
+      const basePrice = pouchCount === 4 ? 3500 : 1000;
+      const adjustmentPerPouch = Math.max(0, substitutionCost) + extraCostPerPouch;
+      return (basePrice + adjustmentPerPouch * pouchCount) * packQuantity;
+    }
+
+    function renderPack() {
+      const pouchCount = Number(packSize.value);
+      const isFamily = pouchCount === 4;
+      familyNote.hidden = !isFamily;
+      quantityLabel.textContent = isFamily ? 'Number of family packs' : 'Number of single packs';
+      const count = selections.length;
+      const atMaximum = count >= maximumItems;
+
+      items.forEach(item => {
+        const quantity = selections.filter(selection => selection === item).length;
+        item.querySelector('output').value = quantity;
+        item.querySelector('[data-delta="-1"]').disabled = quantity === 0;
+        item.querySelector('[data-delta="1"]').disabled = atMaximum || quantity >= Number(item.dataset.limit);
+      });
+
+      const remaining = includedItems - count;
+      const countLabel = count + (count === 1 ? ' item selected.' : ' items selected.');
+      const pouchStatus = remaining > 0 ? countLabel + ' Add ' + remaining + ' more.' : countLabel;
+      const totalCents = getPackTotalCents(pouchCount, quantityInput.valueAsNumber);
+      const validQuantity = quantityInput.validity.valid && Number.isSafeInteger(totalCents);
+      const limitStatus = atMaximum ? ' Limit reached.' : '';
+      const quantityStatus = validQuantity ? '' : ' Enter a valid whole number of packs.';
+      packStatus.textContent = pouchStatus + limitStatus + quantityStatus;
+      availabilityButton.disabled = remaining > 0 || !validQuantity;
+      packTotal.textContent = validQuantity ? 'Total price: ' + currency.format(totalCents / 100) : 'Total price: unavailable';
+    }
+
+    packItems.addEventListener('click', event => {
+      const button = event.target.closest('button[data-delta]');
+      if (!button || button.disabled) return;
+
+      const item = button.closest('.pack-item');
+      if (button.dataset.delta === '1') {
+        selections.push(item);
+      } else {
+        selections.splice(selections.lastIndexOf(item), 1);
+      }
+
+      renderPack();
+    });
+
+    packSize.addEventListener('change', () => {
+      quantityInput.value = '1';
+      renderPack();
+    });
+    quantityInput.addEventListener('input', renderPack);
+    renderPack();
+
+    availabilityButton.addEventListener('click', () => {
+      if (availabilityButton.disabled) return;
+
+      const pouchCount = Number(packSize.value);
+      const packQuantity = quantityInput.valueAsNumber;
+      const itemCounts = Object.fromEntries(items.map(item => [
+        'qty_' + item.dataset.item,
+        selections.filter(selection => selection === item).length
+      ]));
+      window.gtag?.('event', 'pack_order_click', {
+        pack_type: pouchCount === 4 ? 'family' : 'single',
+        pack_quantity: packQuantity,
+        items_per_pouch: selections.length,
+        order_total_usd: getPackTotalCents(pouchCount, packQuantity) / 100,
+        ...itemCounts
+      });
+      dialog.showModal();
+    });
+  </script>
+</body>
+</html>

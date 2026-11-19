@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    if (new URLSearchParams(window.location.search).get('page') === 'order') {
+      window.location.replace('order.html');
+    }
+  </script>
+  <link rel="prefetch" href="order.html">
   <title>SOKUL Family Trail Pack</title>
   <meta name="description" content="Four grab-and-go pouches with trail snacks and electrolyte mix for your next family hike.">
   <script>
@@ -45,22 +51,10 @@
     .header-order { justify-self: end; padding: .65rem clamp(.65rem, 2vw, 1.15rem); background: #fffaf0; color: #20452e; }
     .header-order:hover { background: #e8e1cf; }
     .header-order:focus-visible { outline-color: #fffaf0; }
-    .header-order[hidden] { display: none; }
-    .back-link { display: block; width: fit-content; margin-top: 1rem; color: inherit; }
     :focus-visible { outline: 2px solid #245a3b; outline-offset: 4px; }
     .product-visual { margin: 0; }
     .product-visual img { display: block; width: 100%; height: auto; border-radius: .5rem; }
     figcaption { margin-top: .65rem; font-size: .875rem; color: #435044; }
-    dialog { width: min(100% - 2rem, 34rem); max-height: calc(100dvh - 2rem); border: 1px solid #ddd5c5; border-radius: 1rem; background: #faf7ef; color: inherit; padding: clamp(1rem, 4vw, 2rem); box-shadow: 0 1rem 3rem #14281d40; }
-    dialog::backdrop { background: #14281db3; }
-    .dialog-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-    .dialog-header h2 { margin: 0; font-family: Georgia, serif; font-size: 2rem; }
-    #availability { margin: .5rem 0 1.25rem; }
-    .waitlist-frame { display: block; width: 100%; height: 15rem; border: 0; }
-    .form-fallback { margin: .75rem 0 0; font-size: .875rem; }
-    .form-fallback a { color: inherit; }
-    .close { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; background: transparent; color: inherit; border: 1px solid #ddd5c5; border-radius: 50%; font-size: 1.5rem; line-height: 1; }
-    .close:hover { background: #eee9dc; }
     @media (max-width: 42rem) {
       main { grid-template-columns: 1fr; }
       .product-visual { grid-row: 1; }
@@ -72,7 +66,7 @@
     <div class="shell header-inner">
       <img class="logo" src="images/logo-light.png" alt="SOKUL">
       <p class="header-tagline">Trail snacks 4 hikers</p>
-      <a class="primary header-order" id="header-order" href="?page=order" data-order-placement="header">Order</a>
+      <a class="primary header-order" id="header-order" href="order.html" data-order-placement="header">Customize Pack</a>
     </div>
   </header>
   <main class="shell" id="storefront">
@@ -86,7 +80,7 @@
         <li>Individually wrapped beef stick</li>
         <li>Trail mix, an energy bar, and a sweet treat</li>
       </ul>
-      <a class="primary" href="?page=order" data-order-placement="product">Order</a>
+      <a class="primary" href="order.html" data-order-placement="product">Customize Pack</a>
     </section>
     <figure class="product-visual">
       <img src="images/mvp-example.png" width="1536" height="1024" alt="Family Trail Pack box with four hiker pouches and one pouch’s contents: honey peanut butter, crackers, lemon-lime electrolyte mix, trail mix, an energy bar, a sweet treat, and a beef stick.">
@@ -94,52 +88,12 @@
     </figure>
   </main>
 
-  <main class="shell" id="order-page" hidden>
-    <section aria-labelledby="order-title">
-      <span class="status">Sold out</span>
-      <h1 id="order-title">Order Family Trail Pack</h1>
-      <p>Join the waitlist for an email when the Family Trail Pack is available.</p>
-      <button class="primary" id="availability-button" type="button">Join the waitlist</button>
-      <a class="back-link" href="index.html">Back to product</a>
-    </section>
-  </main>
-
-  <dialog id="signup" aria-labelledby="signup-title" aria-describedby="availability">
-    <div class="dialog-header">
-      <h2 id="signup-title">Sold out</h2>
-      <form method="dialog"><button class="close" type="submit" aria-label="Close" autofocus>×</button></form>
-    </div>
-    <p id="availability">Get an email when the Family Trail Pack is available to order.</p>
-    <iframe
-      class="waitlist-frame"
-      title="SOKUL Family Trail Pack waitlist"
-      src="https://script.google.com/macros/s/AKfycbxAjqrd1y7KDR5_oB817nF2ZJYGifyW4ialg92Ydzs5JrQt3vIOe5nSQhuQ_uYKp06R/exec"
-      loading="lazy"></iframe>
-    <p class="form-fallback">
-      <a href="https://script.google.com/macros/s/AKfycbxAjqrd1y7KDR5_oB817nF2ZJYGifyW4ialg92Ydzs5JrQt3vIOe5nSQhuQ_uYKp06R/exec" target="_blank" rel="noopener">Open the waitlist form in a new tab</a>
-    </p>
-  </dialog>
-
   <script>
-    const dialog = document.querySelector('#signup');
-
     document.querySelectorAll('[data-order-placement]').forEach(link => {
       link.addEventListener('click', () => {
         window.gtag?.('event', 'order_click', { button_placement: link.dataset.orderPlacement });
       });
     });
-
-    document.querySelector('#availability-button').addEventListener('click', () => {
-      dialog.showModal();
-    });
-
-    if (new URLSearchParams(window.location.search).get('page') === 'order') {
-      document.querySelector('#header-order').hidden = true;
-      document.querySelector('#storefront').hidden = true;
-      document.querySelector('#order-page').hidden = false;
-      document.title = 'Order Family Trail Pack | SOKUL';
-      dialog.showModal();
-    }
   </script>
 </body>
 </html>

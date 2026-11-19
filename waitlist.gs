@@ -25,13 +25,15 @@ function doGet() {
         <style>
           * { box-sizing: border-box; }
           body { margin: 0; padding: .25rem; font: 1rem system-ui, sans-serif; color: #183322; background: #faf7ef; }
-          label { display: block; margin-bottom: .4rem; font-weight: 650; }
+          form, #status { max-width: 22rem; margin-inline: auto; }
+          label { display: block; margin-bottom: .4rem; font-weight: 650; text-align: center; }
           input, button { font: inherit; border-radius: .35rem; }
           input { display: block; width: 100%; padding: .75rem; border: 1px solid #7b8576; background: #fffdf8; }
-          button { margin-top: .75rem; padding: .75rem 1.15rem; border: 0; background: #20452e; color: #fffaf0; font-weight: 750; cursor: pointer; }
+          button { display: block; width: 100%; margin-top: .75rem; padding: .75rem 1.15rem; border: 0; background: #20452e; color: #fffaf0; font-weight: 750; cursor: pointer; }
+          button:not(:disabled):hover { background: #2e5b3e; }
           button:disabled { opacity: .65; cursor: wait; }
           :focus-visible { outline: 2px solid #245a3b; outline-offset: 2px; }
-          #status { margin: .6rem 0 0; }
+          #status { margin-top: .6rem; text-align: center; }
         </style>
       </head>
       <body>
@@ -56,6 +58,10 @@ function doGet() {
                 form.hidden = true;
                 status.textContent = 'You’re on the list. We’ll email you when the Family Trail Pack is available.';
                 status.focus();
+                if (window.top !== window) {
+                  // Apps Script wraps this form in its own frame. Send only the event name.
+                  window.top.postMessage('sokul:waitlist_signup', '*');
+                }
               })
               .withFailureHandler(() => {
                 status.textContent = 'We couldn’t save your email. Please try again.';
